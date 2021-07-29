@@ -51,12 +51,12 @@ def ordemN():
     while True:
         try:
             var_ordemN = int(input('Qual é a ordem N do sistema de equações? '))
-            if var_ordemN < 1:
-                print('Favor inserir um número inteiro positivo e não nulo.')
+            if var_ordemN < 2:
+                print('Favor inserir um número maior ou igual a 2.')
             else:
                 break
         except ValueError:
-                print('Favor inserir um número inteiro.')
+                print('Favor inserir um número maior ou igual a 2.')
     return var_ordemN
 
 

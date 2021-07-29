@@ -3,20 +3,28 @@ from sup import sim_def_pos, not_diag_dom
 
 def dec_LU(matrizA, vetorB, ordemN, idet):
 
-    if ordemN == 3:
+    if ordemN == 2:
+        m = matrizA[1][0]/matrizA[0][0]
+        l = [[1, 0], [m, 1]]
+        u = np.linalg.solve(l, matrizA)
+
+        y = np.linalg.solve(l, vetorB)
+        x = np.linalg.solve(u, y)
+
+    elif ordemN == 3:
         m1 = [[1, 0, 0], [-1 * matrizA[2-1][1-1]/matrizA[1-1][1-1], 1, 0], [-1 * matrizA[3-1][1-1]/matrizA[1-1][1-1], 0, 1]]
         m2 = [[1, 0, 0], [0, 1, 0], [0, -1 * np.dot(m1, matrizA)[3-1][2-1]/np.dot(m1, matrizA)[2-1][2-1], 1]]
 
-    u = np.dot(np.dot(m2, m1), matrizA)
-    l = np.linalg.inv(np.dot(m2, m1))
+        u = np.dot(np.dot(m2, m1), matrizA)
+        l = np.linalg.inv(np.dot(m2, m1))
 
-    y = np.linalg.solve(l, vetorB)
-    x = np.linalg.solve(u, y)
+        y = np.linalg.solve(l, vetorB)
+        x = np.linalg.solve(u, y)
 
-    print('=' * 30)
-    print(f'M1: {m1}')
-    print('=' * 30)
-    print(f'M2: {m2}')
+        print('=' * 30)
+        print(f'M1: {m1}')
+        print('=' * 30)
+        print(f'M2: {m2}')
     print('=' * 30)
     print(f'U:\n{u}')
     print('=' * 30)
@@ -34,7 +42,7 @@ def dec_LU(matrizA, vetorB, ordemN, idet):
 
 def dec_Cholesky(matrizA, vetorB, ordemN, idet):
 
-    if sim_def_pos(matrizA):
+    if sim_def_pos(matrizA, ordemN):
         l = [[]]
         for i in range(0, ordemN):
             for j in range(0, ordemN):
