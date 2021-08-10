@@ -42,3 +42,10 @@ def not_diag_dom(matriz, ordemN):
         if a < b:
             print("A matriz A inputada não é diagonal dominante e, portanto, a condição para convergência da solução não é atendida.\nFavor inputar novamente uma matriz válida.")
             return False
+
+def singular (matrizA):
+    if np.linalg.det(matrizA) == 0:
+        return True
+    else:
+        return False
+
